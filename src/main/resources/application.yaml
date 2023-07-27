@@ -5,3 +5,10 @@ spring:
     password: postgres
   flyway:
     default-schema: postgres
+    fail-on-missing-locations: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

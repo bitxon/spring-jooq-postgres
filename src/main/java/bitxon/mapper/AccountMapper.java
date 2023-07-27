@@ -33,7 +33,9 @@ public class AccountMapper {
             value.lastName(),
             value.dateOfBirth(),
             value.currency(),
-            value.moneyAmount()
+            value.moneyAmount(),
+            null,
+            null
         );
     }
 }
