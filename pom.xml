@@ -21,32 +21,10 @@
         <postgresql.version>42.6.0</postgresql.version>
         <testcontainers.version>1.18.1</testcontainers.version>
         <!-- Plugins -->
-        <jooq-testcontainers-codegen-maven-plugin.version>0.0.2</jooq-testcontainers-codegen-maven-plugin.version>
+        <testcontainers-jooq-codegen-maven-plugin.version>0.0.3</testcontainers-jooq-codegen-maven-plugin.version>
         <flyway-maven-plugin.version>9.20.1</flyway-maven-plugin.version>
         <jooq-codegen-maven.version>${jooq.version}</jooq-codegen-maven.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-        </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </pluginRepository>
-    </pluginRepositories>
-
 
     <dependencies>
         <dependency>
@@ -114,8 +92,8 @@
                 <plugins>
                     <plugin>
                         <groupId>org.testcontainers</groupId>
-                        <artifactId>jooq-testcontainers-codegen-maven-plugin</artifactId>
-                        <version>${jooq-testcontainers-codegen-maven-plugin.version}</version>
+                        <artifactId>testcontainers-jooq-codegen-maven-plugin</artifactId>
+                        <version>${testcontainers-jooq-codegen-maven-plugin.version}</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.testcontainers</groupId>
@@ -150,17 +128,19 @@
                                             filesystem:src/main/resources/db/migration
                                         </locations>
                                     </flyway>
-                                    <generator>
-                                        <database>
-                                            <includes>.*</includes>
-                                            <excludes>flyway_schema_history</excludes>
-                                            <inputSchema>postgres</inputSchema>
-                                        </database>
-                                        <target>
-                                            <packageName>bitxon.generated.jooq</packageName>
-                                            <directory>target/generated-sources/jooq</directory>
-                                        </target>
-                                    </generator>
+                                    <jooq>
+                                        <generator>
+                                            <database>
+                                                <includes>.*</includes>
+                                                <excludes>flyway_schema_history</excludes>
+                                                <inputSchema>postgres</inputSchema>
+                                            </database>
+                                            <target>
+                                                <packageName>bitxon.generated.jooq</packageName>
+                                                <directory>target/generated-sources/jooq</directory>
+                                            </target>
+                                        </generator>
+                                    </jooq>
                                 </configuration>
                             </execution>
                         </executions>
